@@ -10,6 +10,8 @@ public class TankAttack : MonoBehaviour
     public KeyCode FireKey=KeyCode.Space;//发射炮弹键位:默认空格键
 
     public float ShellSpeed=10;
+
+    public AudioClip ShotAudioClip;//攻击音效
     void Start()
     {
         FirePos = transform.Find("Pos");
@@ -20,6 +22,9 @@ public class TankAttack : MonoBehaviour
         //如果按键被按下
         if (Input.GetKeyDown(FireKey))
         {
+            //播放音效
+            AudioSource.PlayClipAtPoint(ShotAudioClip,transform.position);
+
             //发射子弹
             GameObject go= Instantiate(ShellPrefab, FirePos.transform.position, FirePos.transform.rotation)as GameObject;
 

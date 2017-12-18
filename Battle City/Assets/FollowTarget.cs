@@ -16,6 +16,7 @@ public class FollowTarget : MonoBehaviour
 
     void Update()
     {
+        if (Player1 == null||Player2==null) return;
         transform.position = _offet + (Player1.position + Player2.position) / 2;
 
         float distance = Vector3.Distance(Player1.position, Player2.position);//1和2的距离

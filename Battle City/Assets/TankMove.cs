@@ -10,9 +10,17 @@ public class TankMove : MonoBehaviour
     private Rigidbody _rigidbody;
 
     public int Number = 1;//增加一个玩家、编号默认1
+
+    public AudioClip IdleAudioClip;
+
+    public AudioClip DrivingAudioClip;
+
+    private AudioSource _audio;
+
     void Start()
     {
         _rigidbody = this.GetComponent<Rigidbody>();
+        _audio = this.GetComponent<AudioSource>();
     }
 
 
@@ -29,6 +37,35 @@ public class TankMove : MonoBehaviour
 
         //物体转速，沿Y轴 transform.up
         _rigidbody.angularVelocity = transform.up * h * AngularSpeed;
+
+
+        //判断按键按下
+        if (Mathf.Abs(h)>0.1||Mathf.Abs(v)>0.1)
+        {
+            _audio.clip = DrivingAudioClip;//行驶中
+
+            if (_audio.isPlaying==false)
+            {
+                _audio.Play();
+                _audio.volume = 1;
+
+            }
+        }
+        else
+        {
+            _audio.clip = IdleAudioClip;
+
+            if (_audio.isPlaying == false)
+            {
+                _audio.Play();
+                _audio.volume = 1;
+
+            }
+               
+
+
+
+        }
 
     }
 
